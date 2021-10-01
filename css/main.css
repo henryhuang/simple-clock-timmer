@@ -83,12 +83,8 @@ canvas{
 	border-radius:5px;
 }
 
-.btn:hover{
-	text-decoration:none;
-	padding:4px 9px 4px 9px;
-	color:#fefefe;
-	background-color:#F3A829;
-	border-radius:5px;
+.btn-green {
+	background-color:darkseagreen;
 }
 
 #time-digital {

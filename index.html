@@ -20,9 +20,11 @@
 <!--<input type="text" id="altime" placeholder="hh:mm"/><br><br>-->
 <!--<a href="javascript:void(0)" id="set">set Alarm</a>-->
 <a href="javascript:void(0)" id="currentTime" class="btn">当前时间</a>
-<a href="javascript:void(0)" id="reset" class="btn">开始</a>
+<a href="javascript:void(0)" id="reset" class="btn">开始计时</a>
+<a href="javascript:void(0)" id="fullWindow" class="btn btn-green">全屏</a>
 
 <script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/clock.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="js/jquery.thooClock.js"></script>
 <script >
@@ -90,6 +92,10 @@
 
 	$('#currentTime').click(function(){
 		$.fn.thooClock.currentTime();
+	});
+
+	$('#fullWindow').click(function(){
+		document.getElementById("myclock").webkitRequestFullscreen()
 	});
 
 	function alarmBackground(y){
