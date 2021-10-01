@@ -29,6 +29,7 @@
 <script type="text/javascript" src="js/jquery.thooClock.js"></script>
 <script >
 	var intVal, myclock;
+	var isFullScreen = false;
 
 	$(window).resize(function(){
 		window.location.reload()
@@ -94,9 +95,25 @@
 		$.fn.thooClock.currentTime();
 	});
 
+	var changeFullScreenBtn = function (isFullScreen) {
+		if (isFullScreen) {
+			$("#fullWindow").text("退出全屏")
+		} else {
+			$("#fullWindow").text("进入全屏")
+		}
+	};
+
 	$('#fullWindow').click(function(){
-		document.getElementById("myclock").webkitRequestFullscreen()
+		if (isFullScreen) {
+			existFullscreen();
+			isFullScreen = false;
+		} else {
+			fullscreen()
+			isFullScreen = true
+		}
+		changeFullScreenBtn(isFullScreen)
 	});
+
 
 	function alarmBackground(y){
 			var color;

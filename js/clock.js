@@ -11,6 +11,18 @@ const fullscreen = () => {
     }
 }
 
+const existFullscreen = () => {
+    if (document.exitFullscreen) {
+        document.exitFullscreen()
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen()
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen()
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen()
+    }
+}
+
 const onWindowsResize = () => {
     const isFull = !!(document.webkitIsFull || document.mozFullScreen || document.msFullscreenElement
     || document.fullscreenElement);
