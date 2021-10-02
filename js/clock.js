@@ -25,13 +25,15 @@ const existFullscreen = () => {
 
 var isFullScreen = false;
 
+const canvasHeight = $(document).height()/1.4;
+
 $(document).ready(function(){
 
     var audioElement = new Audio("");
 
     //clock plugin constructor
     $('#myclock').thooClock({
-        size:$(document).height()/1.4,
+        size: canvasHeight,
         sweepingMinutes:true,
         sweepingSeconds:false,
         showNumerals:true,
@@ -73,3 +75,19 @@ $("#fullWindow").click(() => {
         changeFullScreenBtn()
     }
 });
+
+const  resetContainerHeight = () => {
+    const windowHeight = $(window).height()
+    const myClockHeight = $("#myclock").height()
+    let containerHeight = $("#container").height()
+    if (myClockHeight === 0) {
+        containerHeight = containerHeight + canvasHeight
+    }
+    const offset = windowHeight - containerHeight
+    if (offset > 0) {
+        $("#container").css('margin-top', offset / 2)
+    }
+}
+resetContainerHeight()
+window.onresize = resetContainerHeight
+
