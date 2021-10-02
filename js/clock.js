@@ -23,10 +23,53 @@ const existFullscreen = () => {
     }
 }
 
-const onWindowsResize = () => {
-    const isFull = !!(document.webkitIsFull || document.mozFullScreen || document.msFullscreenElement
-    || document.fullscreenElement);
-    if (isFull == false) {
+var isFullScreen = false;
 
+$(document).ready(function(){
+
+    var audioElement = new Audio("");
+
+    //clock plugin constructor
+    $('#myclock').thooClock({
+        size:$(document).height()/1.4,
+        sweepingMinutes:true,
+        sweepingSeconds:false,
+        showNumerals:true,
+        brandText:'ROLEX',
+        brandText2:'HENRY HUANG',
+        onEverySecond:function(){
+            //callback that should be fired every second
+            //console.log(new Date().getSeconds());
+        }
+    });
+
+});
+
+
+$('#reset').click(function(){
+    $.fn.thooClock.reset();
+});
+
+$('#currentTime').click(function(){
+    $.fn.thooClock.currentTime();
+});
+
+var changeFullScreenBtn = function () {
+    if (isFullScreen) {
+        $("#fullWindow").text("退出全屏")
+    } else {
+        $("#fullWindow").text("进入全屏")
     }
-}
+};
+
+$("#fullWindow").click(() => {
+    if (isFullScreen) {
+        existFullscreen()
+        isFullScreen = false
+        changeFullScreenBtn()
+    } else {
+        fullscreen()
+        isFullScreen = true
+        changeFullScreenBtn()
+    }
+});

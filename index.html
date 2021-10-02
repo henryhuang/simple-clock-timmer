@@ -12,123 +12,18 @@
 <body>
 <div class="container">
 	<div id="myclock"></div>
-<!--	<div id="alarm1" class="alarm"><a href="javascript:void(0)" id="turnOffAlarm">ALARM OFF</a></div>-->
 </div>
 <div id="time-digital">
 	00:00:00
 </div>
-<!--<input type="text" id="altime" placeholder="hh:mm"/><br><br>-->
-<!--<a href="javascript:void(0)" id="set">set Alarm</a>-->
-<a href="javascript:void(0)" id="currentTime" class="btn">当前时间</a>
-<a href="javascript:void(0)" id="reset" class="btn">开始计时</a>
-<a href="javascript:void(0)" id="fullWindow" class="btn btn-green">全屏</a>
+<a id="currentTime" class="btn">当前时间</a>
+<a id="reset" class="btn">开始计时</a>
+<a id="fullWindow" class="btn btn-green">全屏</a>
 
-<script type="text/javascript" src="js/moment.min.js"></script>
-<script type="text/javascript" src="js/clock.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="js/jquery.thooClock.js"></script>
-<script >
-	var intVal, myclock;
-	var isFullScreen = false;
-
-	$(window).resize(function(){
-		window.location.reload()
-	});
-
-	$(document).ready(function(){
-
-		var audioElement = new Audio("");
-
-		//clock plugin constructor
-		$('#myclock').thooClock({
-			size:$(document).height()/1.4,
-			sweepingMinutes:true,
-			sweepingSeconds:false,
-			onAlarm:function(){
-				//all that happens onAlarm
-				$('#alarm1').show();
-				alarmBackground(0);
-				//audio element just for alarm sound
-				document.body.appendChild(audioElement);
-				var canPlayType = audioElement.canPlayType("audio/ogg");
-				if(canPlayType.match(/maybe|probably/i)) {
-					audioElement.src = 'alarm.ogg';
-				} else {
-					audioElement.src = 'alarm.mp3';
-				}
-				// erst abspielen wenn genug vom mp3 geladen wurde
-				audioElement.addEventListener('canplay', function() {
-					audioElement.loop = true;
-					audioElement.play();
-				}, false);
-			},
-			showNumerals:true,
-			brandText:'ROLEX',
-			brandText2:'HENRY HUANG',
-			onEverySecond:function(){
-				//callback that should be fired every second
-				//console.log(new Date().getSeconds());
-			},
-			// alarmTime:'15:30',
-			offAlarm:function(){
-				$('#alarm1').hide();
-				audioElement.pause();
-				clearTimeout(intVal);
-				$('body').css('background-color','#FCFCFC');
-			}
-		});
-
-	});
-
-
-
-	$('#turnOffAlarm').click(function(){
-		$.fn.thooClock.clearAlarm();
-	});
-
-
-	$('#reset').click(function(){
-		$.fn.thooClock.reset();
-	});
-
-	$('#currentTime').click(function(){
-		$.fn.thooClock.currentTime();
-	});
-
-	var changeFullScreenBtn = function (isFullScreen) {
-		if (isFullScreen) {
-			$("#fullWindow").text("退出全屏")
-		} else {
-			$("#fullWindow").text("进入全屏")
-		}
-	};
-
-	$('#fullWindow').click(function(){
-		if (isFullScreen) {
-			existFullscreen();
-			isFullScreen = false;
-		} else {
-			fullscreen()
-			isFullScreen = true
-		}
-		changeFullScreenBtn(isFullScreen)
-	});
-
-
-	function alarmBackground(y){
-			var color;
-			if(y===1){
-				color = '#CC0000';
-				y=0;
-			}
-			else{
-				color = '#FCFCFC';
-				y+=1;
-			}
-			$('body').css('background-color',color);
-			intVal = setTimeout(function(){alarmBackground(y);},100);
-	}
-</script>
-
+<script src="js/moment.min.js"></script>
+<script src="js/fullscreen.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="js/jquery.thooClock.js"></script>
+<script src="js/clock.js"></script>
 </body>
 </html>
